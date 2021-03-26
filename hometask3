@@ -1,0 +1,63 @@
+//1. Описать несколько структур – любой легковой автомобиль SportCar и любой грузовик TrunkCar.
+
+//2. Структуры должны содержать марку авто, год выпуска, объем багажника/кузова, запущен ли двигатель, открыты ли окна, заполненный объем багажника.
+
+//3. Описать перечисление с возможными действиями с автомобилем: запустить/заглушить двигатель, открыть/закрыть окна, погрузить/выгрузить из кузова/багажника груз определенного объема.
+
+//4. Добавить в структуры метод с одним аргументом типа перечисления, который будет менять свойства структуры в зависимости от действия.
+
+//5. Инициализировать несколько экземпляров структур. Применить к ним различные действия.
+
+//6. Вывести значения свойств экземпляров в консоль.
+
+
+enum Engine{
+    case start
+    case stop
+}
+enum Windows{
+    case open
+    case close
+}
+enum Put{
+    case putin
+    case putout 
+}
+struct Cars {
+    let brand: String
+    let release: Int
+    var valume: Int
+    var filledLuggage: Int
+    var Engine : Engine{
+        willSet {
+            if newValue == .start {
+                print ("\(brand) двигатель запущен")
+            } else {print("\(brand) двигатель заглушен")}
+        }
+    }
+    var Windows : Windows {
+        willSet {
+            if newValue == .open {
+                print("\(brand) окна открыты")
+            } else { print("\(brand) окна закрыты") }
+        }
+    }
+    var Put : Put {
+        willSet {
+            if newValue == .putin {
+                print("В \(brand) загрузили вещи")
+            }else {
+                print("В \(brand) выгрузили вещи")
+            }
+        }
+    }
+}
+var car1 = Cars(brand: "volvo", release: 2013, valume: 100, filledLuggage: 50, Engine: .start, Windows: .close, Put: .putin)
+var truck = Cars(brand: "Doge", release: 2009, valume: 500, filledLuggage: 500, Engine: .stop, Windows: .open, Put: .putout)
+car1.Engine = .start
+truck.Windows = .close
+car1.Put = .putout
+print("Машина марки \(car1.brand) выпущена в \(car1.release).")
+
+
+
